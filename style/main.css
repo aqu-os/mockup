@@ -78,7 +78,9 @@ button {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: url('/assets/wallpaper.svg');
+  /* Relative, not `/assets/...`: Trunk puts this stylesheet and `assets/` side by side at
+     the root of dist/, and on GitHub Pages that root is /mockup/, not the domain's root. */
+  background-image: url('assets/wallpaper.svg');
   background-size: cover;
   background-position: center;
   z-index: 0;

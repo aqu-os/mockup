@@ -1,0 +1,60 @@
+# Builds the mockup with Trunk and publishes it to this repository's GitHub
+# Pages site (https://aqu-os.github.io/mockup/) on every push to main.
+#
+# Needs Settings -> Pages -> Source set to "GitHub Actions".
+name: Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deployment at a time; don't cancel one halfway through.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Reads rust-toolchain.toml (stable, plus the wasm32-unknown-unknown target).
+      - name: Install the toolchain
+        run: rustup toolchain install
+
+      - name: Install Trunk
+        uses: taiki-e/install-action@v2
+        with:
+          tool: trunk
+
+      - name: Cache builds
+        uses: Swatinem/rust-cache@v2
+
+      # A project site is served below the repository's name, not at the domain's
+      # root - every URL Trunk generates has to start with it.
+      - name: Build
+        run: trunk build --release --public-url "/${{ github.event.repository.name }}/"
+
+      - name: Upload the site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
