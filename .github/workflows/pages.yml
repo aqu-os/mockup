@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       # Reads rust-toolchain.toml (stable, plus the wasm32-unknown-unknown target).
       - name: Install the toolchain
@@ -44,7 +44,7 @@ jobs:
         run: trunk build --release --public-url "/${{ github.event.repository.name }}/"
 
       - name: Upload the site
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: dist
 
@@ -57,4 +57,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
