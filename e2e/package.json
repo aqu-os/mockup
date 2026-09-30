@@ -1,0 +1,15 @@
+{
+  "name": "aquos-mockup-e2e",
+  "private": true,
+  "version": "0.0.0",
+  "description": "End-to-end tests for the Aquos desktop mockup. Run `npm test` from this directory (or `npm test` after `npm install` once) — it builds and serves the app and runs every spec in one go.",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.48.0"
+  }
+}

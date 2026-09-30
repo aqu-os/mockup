@@ -1,0 +1,11 @@
+Aquos notes
+===========
+
+- Kernel exposes everything through a single syscall() entry point.
+- Window managers (floating/tiling/infinite-scroll) are policy on top of
+  the kernel, not kernel state themselves.
+- File Explorer's tree now comes from the real ./fs folder, embedded at
+  build time via build.rs — no runtime server needed to browse it.
+
+TODO: wire up a "new file" action once we decide what persistence looks
+like for a real (non-mockup) filesystem.

@@ -1,0 +1,6 @@
+[boot]
+splash = true
+timeout_ms = 1500
+
+[display]
+default_scale = 1.0

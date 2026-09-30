@@ -1,0 +1,11 @@
+Marcel Lambert
+==============
+
+Experience
+----------
+- Building Aquos, an experimental desktop OS UI.
+
+Skills
+------
+- Rust, WASM, Leptos
+- Systems design
